@@ -2,6 +2,7 @@
 Домашнее задание от cisco devnet марафона
 
 Для запуска необходимо:
+
       - заполнить inventory/device.yaml необходимыми устройствами и их ip адресами
       - в файле inventory/groups.yaml указать credentionals для устройств.
 
