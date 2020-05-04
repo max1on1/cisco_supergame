@@ -51,9 +51,8 @@ def apply_styles(graph, styles):
 def get_diffs(filename):
 
     latest_file = sorted(glob.iglob('img/*.svg'), key=os.path.getctime)[-2]
-    print(latest_file)
+#иногда бывает что модуль ос возвращает два файла как последние созданные, это надо проверить
     if isinstance(latest_file, list):
-        print('ARRAY')
         if '.' in latest_file:
             latest_file=latest_file.split('.')
             latest_file=latest_file[0]
@@ -62,7 +61,6 @@ def get_diffs(filename):
             latest_file=latest_file[0]
             print(latest_file)
     else:
-        print('NOT ARRAY')
         if '.' in latest_file:
             latest_file=latest_file.split('.')
             latest_file=latest_file[0]
@@ -74,6 +72,7 @@ def get_diffs(filename):
     lines2 = open(filename[0]).readlines()
     pprint.pprint(lines1)
     pprint.pprint(lines2)
+#выводим в консоль изменения с предыдущей топологией
     for line in difflib.unified_diff(lines1, lines2):
         print(line)
 
