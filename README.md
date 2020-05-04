@@ -9,8 +9,8 @@
 
 Изменение топологии реализовано средствами сравнения дифа двух файлов топологии(в папке img файлы без рассширения) если диф был то в консоль выведется дифф
 Пример:
-+   	r2 -- r6 [label="            " headlabel="Et1/1" taillabel="Et0/1"]
+      '+   	r2 -- r6 [label="            " headlabel="Et1/1" taillabel="Et0/1"]'
 
-+  	  r2 -- r5 [label="            " headlabel="Et0/3" taillabel="Et0/2"]
+      '+  	  r2 -- r5 [label="            " headlabel="Et0/3" taillabel="Et0/2"]'
 
-+   	r1 -- r6 [label="            " headlabel="Et1/0" taillabel="Et0/1"]
+       ' +   	r1 -- r6 [label="            " headlabel="Et1/0" taillabel="Et0/1"]'
