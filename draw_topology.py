@@ -2,6 +2,11 @@
 # Based on http://matthiaseisen.com/articles/graphviz/
 
 import sys
+import difflib
+import glob
+import os
+import pprint
+from datetime import datetime  
 
 try:
     import graphviz as gv
@@ -43,11 +48,46 @@ def apply_styles(graph, styles):
     graph.edge_attr.update(('edges' in styles and styles['edges']) or {})
     return graph
 
+def get_diffs(filename):
+
+    latest_file = sorted(glob.iglob('img/*.svg'), key=os.path.getctime)[-2]
+    print(latest_file)
+    if isinstance(latest_file, list):
+        print('ARRAY')
+        if '.' in latest_file:
+            latest_file=latest_file.split('.')
+            latest_file=latest_file[0]
+            print(latest_file)
+        else:
+            latest_file=latest_file[0]
+            print(latest_file)
+    else:
+        print('NOT ARRAY')
+        if '.' in latest_file:
+            latest_file=latest_file.split('.')
+            latest_file=latest_file[0]
+            print(latest_file)
+
+    filename=filename.split('.')
+    print(latest_file)
+    lines1 = open(latest_file).readlines()
+    lines2 = open(filename[0]).readlines()
+    pprint.pprint(lines1)
+    pprint.pprint(lines2)
+    for line in difflib.unified_diff(lines1, lines2):
+        print(line)
+
+
 
 def draw_topology(topology_dict, output_filename='img/topology'):
     '''
     Генерируем топологию
     '''
+    #Проверяем колличество файлов в папке
+    a = os.listdir('img')
+
+    now = datetime.now()
+    output_filename=output_filename+'_'+now.strftime("%H:%M:%S")
     nodes = set([
         item[0]
         for item in list(topology_dict.keys()) + list(topology_dict.values())
@@ -65,5 +105,13 @@ def draw_topology(topology_dict, output_filename='img/topology'):
             head, tail, headlabel=h_label, taillabel=t_label, label=" " * 12)
 
     g1 = apply_styles(g1, styles)
+    
     filename = g1.render(filename=output_filename)
     print("Graph saved in", filename)
+    
+    #если в папке есть более старые файлы выведем дифф в консоль
+    if len(a) <= 2:
+        print("Directory is empty, nothing to diff")
+    else:    
+        difs = get_diffs(filename)
+    

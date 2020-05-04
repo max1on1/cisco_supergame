@@ -27,13 +27,6 @@ def show_lldp(task):
     task.host['f_hostname'] = hostname
     task.host['lldp_data'] = parsed_output
 
-def save_topology_dict(topology_dict):
-    dict = topology_dict
-    f = open("topology_files/topology.txt","w")
-    f.write( str(dict) )
-    f.close()
-
-
 def main():
     # определяем путь до скрипта для упрощения навигации
     # иницилизируем норнир
@@ -49,8 +42,6 @@ def main():
                 #проверяем на дублирующиеся линки
                 if (neighbor_hostname,neighbor_int) not in topology_dict:
                     topology_dict.update({(nr.inventory.dict()['hosts'][host]['data']['f_hostname'],local_int):(neighbor_hostname,neighbor_int)})
-        #Сохраняем словарь с топологией в файл
-        save_topology_dict(topology_dict)
 
         pprint.pprint(topology_dict)
         #Рисуем граф с нашей топологией и сохраняем в папку img/
