@@ -11,7 +11,6 @@ from nornir.plugins.functions.text import print_title, print_result
 from nornir import InitNornir
 from nornir.core import exceptions
 from nornir.core.filter import F
-from nornir_scrapli.tasks import send_command
 from nornir.plugins.tasks import networking
 
 def show_lldp(task):
