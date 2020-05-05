@@ -3,23 +3,23 @@
 #  hostname: 192.168.1.105
 #  groups: 
 #    - cisco
-#SW6:
-#  hostname: 192.168.1.116
-#  groups: 
-#    - cisco
+r6:
+  hostname: 192.168.1.116
+  groups: 
+    - cisco
 #SW4:
-  #hostname: 192.168.1.114
- # groups: 
+#  hostname: 192.168.1.114
+#  groups: 
 #    - cisco
 #SW3:
- # hostname: 192.168.1.113
+#  hostname: 192.168.1.113
 #  groups: 
 #    - cisco
-SW2:
-  hostname: 192.168.1.112
-  groups: 
-    - cisco
-SW1:
-  hostname: 192.168.1.111
-  groups: 
-    - cisco
+#SW2:
+#  hostname: 192.168.1.112
+#  groups: 
+#    - cisco
+#SW1:
+#  hostname: 192.168.1.111
+#  groups: 
+#    - cisco
