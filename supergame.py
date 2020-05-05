@@ -39,27 +39,27 @@ def show_lldp(task):
 def main():
     # определяем путь до скрипта для упрощения навигации
     # иницилизируем норнир
-    with InitNornir(config_file="config.yaml") as nr:
-  #      nr = InitNornir(config_file="config.yaml")
+  #  with InitNornir(config_file="config.yaml") as nr:
+        nr = InitNornir(config_file="config.yaml")
         nr.run(task=show_lldp)
-      
         topology_dict = {}
         exit_flag = False
+        first_host = next(iter(nr.inventory.get_inventory_dict()['hosts'] )) 
         # проверяем не обноружилось ли новых хостов, если обнаружились то добавляем их в инвентори
         # и запускаем таск снова
         while exit_flag == False:
             for host in nr.inventory.dict()['hosts']:
                 if nr.inventory.dict()['hosts'][host]['data']['lldp_det']:
                     for item in nr.inventory.dict()['hosts'][host]['data']['lldp_det']:
-                        if item[4] not in nr.inventory.dict()['hosts']:
+                        #if item[4] not in nr.inventory.dict()['hosts']:
+                        if item[4] == first_host:
+                            exit_flag = True
+                        else:
                             nr.inventory.add_host(item[4])
                             nr.inventory.hosts[item[4]].hostname = item[7]
-                            #nr.inventory.hosts[item[4]].groups = ['cisco']
-                            pprint.pprint(nr.inventory.dict())
-                            print(item[4])
+                            print('New host was founded')
+                            print('Processing...')
                             nr.run(task=show_lldp)
-                        else:
-                            exit_flag = True
 
         #собираем итоговый словарь топологии
         for host in nr.inventory.dict()['hosts']:

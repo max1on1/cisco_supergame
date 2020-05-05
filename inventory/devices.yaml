@@ -3,7 +3,7 @@
 #  hostname: 192.168.1.105
 #  groups: 
 #    - cisco
-r6:
+r6.dom.com:
   hostname: 192.168.1.116
   groups: 
     - cisco
