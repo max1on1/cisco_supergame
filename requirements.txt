@@ -2,5 +2,5 @@ graphviz==0.14
 napalm==2.5.0
 netmiko==3.1.0
 nornir==2.4.0
-paramiko==2.7.1
+paramiko==2.10.1
 textfsm==1.1.0
